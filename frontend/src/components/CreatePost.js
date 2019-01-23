@@ -15,16 +15,6 @@ class CreatePost extends Component {
         body: '',
         category: ''
     }
-    handleChange = (e) => {
-        console.log(e.target)
-        const text = e.target.value
-        alert(text)
-
-        this.setState(() => ({
-            text,
-            toHome: false,
-        }))
-    }
     handleChangeSelect = (e) => {
         const text = e.target.value
         this.setState(() => ({
@@ -51,11 +41,9 @@ class CreatePost extends Component {
     render() {
         const { toHome } = this.state
         const {categories} = this.props.categories
-        let finalCats;
+        let finalCats = [];
         if(categories){
             finalCats = categories
-        }else{
-            finalCats = []
         }
         if (toHome === true) {
             return <Redirect to='/' />

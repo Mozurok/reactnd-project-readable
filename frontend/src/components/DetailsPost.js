@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import '../App.css';
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import SendButton from '@material-ui/icons/Send'
 import CommentCard from './CommentCard'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {handlerGetPostComments, handlerAddCommentToPost} from "../action/comments";
 
 
@@ -44,10 +43,23 @@ class DetailsPost extends Component {
         }))
     }
     render() {
-        const {post} = this.props;
+        const {post} = this.props
         const {id} = post
         if (id === undefined) {
-            return <CircularProgress />
+            return (
+                <div style={{padding: '10px'}}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Link to={'/'}>
+                                <IconButton  aria-label="Back Button">
+                                    <BackIcon />
+                                </IconButton>
+                            </Link>
+                            <h2>Post não encontrado. O mesmo pode ter sido apagado</h2>
+                        </Grid>
+                    </Grid>
+                </div>
+            )
         }
         const {category} = this.props.match.params
         return (

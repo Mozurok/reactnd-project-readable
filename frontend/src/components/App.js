@@ -18,8 +18,8 @@ class App extends Component {
       isTimeSort: false,
   }
   componentDidMount(){
-    this.props.dispatch(handlerGetAllPosts())
-    this.props.dispatch(handlerGetAllCategories())
+    this.props.handlerGetAllPosts()
+    this.props.handlerGetAllCategories()
   }
   changePostSort = (sortBy) =>{
     if(sortBy === 'vote'){
@@ -63,4 +63,11 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+function mapDispatchToProps(dispatch) {
+    return {
+        handlerGetAllPosts: () => dispatch(handlerGetAllPosts()),
+        handlerGetAllCategories: () => dispatch(handlerGetAllCategories()),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(App);
